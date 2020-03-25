@@ -1,0 +1,17 @@
+version: "2"
+services:
+  app:
+    container_name: express
+    restart: always
+    build: .
+    ports:
+      - "4000:4000"
+    environment:
+      - SECRET_KEY="Xn2r5u8x!A%D*G-K"
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
