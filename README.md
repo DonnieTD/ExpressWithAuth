@@ -2,7 +2,7 @@
 
 Babel/ES6 Ready<br/>
 Connects to DB automatically using mongodb driver ( not mongoose) <br/>
-Builr JWT authentication with server side cookies, using CSURF for CSRF tokens.<br/>
+Built in JWT authentication with server side cookies, using CSURF for CSRF tokens.<br/>
 Dockerized to run wherever you need it to.
 
 
