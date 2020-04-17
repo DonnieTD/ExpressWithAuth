@@ -6,7 +6,7 @@ Built in JWT authentication with server side cookies, using CSURF for CSRF token
 Dockerized to run wherever you need it to.
 
 
-To start API:<br/><br/>
+To start API:
 
 cd into server<br/>
 docker-compose build<br/>
