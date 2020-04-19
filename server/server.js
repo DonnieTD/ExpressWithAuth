@@ -3,35 +3,47 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser');
 const users = require('./routes/users/users');
 const cors = require('cors');
-const csrf = require('csurf');
+const csurf = require('csurf');
 
 import { connectToMongo } from './lib/mongoConnect';
 
 const app = express();
 
 connectToMongo(
-    'mongodb://mongo:27017/',
-    'DBNAME',
     'Connection Succesful(MONGO)'
 );
 
-app.use(express.json());
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(cors({ credentials: true }));
-app.use(csrf({ cookie: true }))
+app.use([
+        express.json(),
+        cookieParser(),
+        bodyParser.urlencoded({ 
+            extended: false 
+        }),
+        cors({
+            origin: [
+                process.env.CLIENTURLS.split(";")[0]
+            ],
+            credentials: true
+        }),
+        csurf({ 
+            cookie: {
+                httpOnly:true,
+                maxAge: 10*60
+            }
+        }),
+        (req, res, next) => {
+            res.cookie('XSRF-TOKEN', req.csrfToken());
+            res.locals._csrf = req.csrfToken();
+            next();
+        }
+]);
 
-// Send CSRF token in a cookie
-app.use(function (req, res, next) {
-    res.cookie('XSRF-TOKEN', req.csrfToken(), { path: '/', secure: true, maxAge: 600000, sameSite: 'strict' });
-    next();
+app.get('/', function (req, res) {
+    res.json({ welcome: "Welcome to the api" })
 });
-
-// Come and get your CSRF token bruv
-app.get('/', (req, res) => res.send({ csrfToken: req.csrfToken() }));
 
 app.use('/users', users);
 
-app.listen(4000, function () {
-    console.log('Express Server Running on: ', 4000);
+app.listen(process.env.PORT, function () {
+    console.log('Express Server Running on: ', process.env.PORT);
 });

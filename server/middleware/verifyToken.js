@@ -1,11 +1,11 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 const verifyToken = async (req, res, next) => {
-  const token = req.cookies.token || '';
+  const token = req.cookies.token || "";
 
   try {
     if (!token) {
-      return res.status(401).json('You need to Login')
+      return res.status(401).json("You need to Login");
     }
 
     const decrypt = await jwt.verify(token, process.env.SECRET_KEY);
@@ -13,10 +13,10 @@ const verifyToken = async (req, res, next) => {
     req.user = {
       UserName: decrypt.UserName,
     };
-    
+
     next();
   } catch (err) {
-     return res.status(500).json(err.toString());
+    return res.status(500).json(err.toString());
   }
 };
 

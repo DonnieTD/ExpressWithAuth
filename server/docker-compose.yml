@@ -1,17 +1,24 @@
 version: "2"
 services:
   app:
+    env_file: .env
     container_name: express
     restart: always
-    build: .
+    build: 
+      context: .
+      args:
+        PORT: ${PORT} 
     ports:
-      - "4000:4000"
-    environment:
-      - SECRET_KEY="Xn2r5u8x!A%D*G-K"
+      - "${PORT}:${PORT}"
     links:
       - mongo
   mongo:
+    env_file: .env
     container_name: mongo
     image: mongo
     ports:
-      - "27017:27017"
+      - "${DBPORT}:${DBPORT}"
+    volumes:
+      - MERN:/data/db
+volumes:
+  MERN:
