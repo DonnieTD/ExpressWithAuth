@@ -9,9 +9,7 @@ import { connectToMongo } from './lib/mongoConnect';
 
 const app = express();
 
-connectToMongo(
-    'Connection Succesful(MONGO)'
-);
+connectToMongo('Connection Succesful(MONGO)');
 
 app.use([
         express.json(),
