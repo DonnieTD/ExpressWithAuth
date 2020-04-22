@@ -9,8 +9,6 @@ async function connectToMongo(successMessage) {
             return console.log(err)
         };
 
-        let index;
-
         if(process.env.ENV == "PROD"){
             DBINSTANCE = client.db(process.env.DBNAMEPROD);
         }else if(process.env.ENV == "QA"){
@@ -18,8 +16,6 @@ async function connectToMongo(successMessage) {
         }else{
             DBINSTANCE = client.db(process.env.DBNAMEDEV);
         }
-
-       
     })
 }
 
