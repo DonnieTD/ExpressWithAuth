@@ -14,8 +14,6 @@ docker-compose up
 And we're up on port 4000
 
 //TO DO
-
-Test new stuff
-Automatically add inex and seed data (seems like it need be done in the js)
-Test the new db's
-Test wtih client
+Clean Up 
+Deploy
+Write docs

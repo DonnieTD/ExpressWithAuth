@@ -5,7 +5,7 @@ services:
     container_name: express
     restart: always
     build: 
-      context: .
+      context: ./server
       args:
         PORT: ${PORT} 
     ports:
@@ -19,6 +19,6 @@ services:
     ports:
       - "${DBPORT}:${DBPORT}"
     volumes:
-      - MERN:/data/db
+      - ExpressWithAuth:/data/db
 volumes:
-  MERN:
+  ExpressWithAuth:

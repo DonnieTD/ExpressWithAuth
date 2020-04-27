@@ -9,13 +9,8 @@ async function connectToMongo(successMessage) {
             return console.log(err)
         };
 
-        if(process.env.ENV == "PROD"){
-            DBINSTANCE = client.db(process.env.DBNAMEPROD);
-        }else if(process.env.ENV == "QA"){
-            DBINSTANCE = client.db(process.env.DBNAMEQA);
-        }else{
-            DBINSTANCE = client.db(process.env.DBNAMEDEV);
-        }
+        DBINSTANCE = client.db(process.env.DBNAME);
+        console.log(successMessage)
     })
 }
 

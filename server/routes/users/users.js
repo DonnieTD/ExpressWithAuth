@@ -28,7 +28,7 @@ router.post("/login", async function (req, res) {
 
     res.cookie("token", LoginResponse[0], {
         expires: new Date(Date.now() + "10m"),
-        secure: false, // set to true on production
+        secure: true, 
         httpOnly: true,
       })
       .send(LoginResponse[1]);
