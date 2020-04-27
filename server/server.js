@@ -1,29 +1,28 @@
-const [express,bodyParser,cookieParser,users,cors,csurf] = [
+import { connectToMongo } from './lib/mongoConnect';
+
+const [express,bodyParser,cookieParser,users,cors,csurf,app] = [
     require('express'),
     require('body-parser'),
     require('cookie-parser'),
     require('./routes/users/users'),
     require('cors'),
-    require('csurf')
+    require('csurf'),
+    express()
 ];
-
-const app = express();
-
-import { connectToMongo } from './lib/mongoConnect';
 
 connectToMongo('Connection Succesful(MONGO)');
 
 app.use([
-        express.json(),
-        cookieParser(),
-        bodyParser.urlencoded({ extended: false }),
-        cors({origin: process.env.CLIENTURLS.split(";")[0],credentials: true}),
-        csurf({ cookie: {   httpOnly: true, maxAge: 10*60   }}),
-        (req, res, next) => {
-            res.cookie('XSRF-TOKEN', req.csrfToken());
-            res.locals._csrf = req.csrfToken();
-            next();
-        }
+    express.json(),
+    cookieParser(),
+    bodyParser.urlencoded({ extended: false }),
+    cors({origin: process.env.CLIENTURLS.split(";")[0],credentials: true}),
+    csurf({ cookie: {   httpOnly: true, maxAge: 10*60   }}),
+    (req, res, next) => {
+        res.cookie('XSRF-TOKEN', req.csrfToken());
+        res.locals._csrf = req.csrfToken();
+        next();
+    }
 ]);
 
 app.get('/', function (req, res) {
@@ -32,6 +31,4 @@ app.get('/', function (req, res) {
 
 app.use('/users', users);
 
-app.listen(process.env.PORT, function () {
-    console.log('Express Server Running on: ', process.env.PORT);
-});
+app.listen(process.env.PORT,() => {console.log('Express Server Running on: ', process.env.PORT)});

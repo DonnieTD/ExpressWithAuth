@@ -1,19 +1,16 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "My express base with auth",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node server.js",
-    "init": "babel-node ./init/init.js"
+    "start": "babel-node server.js"
   },
-  "author": "",
+  "author": "Donovan van der Linde",
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.9.0",
     "@babel/node": "^7.8.7",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.9.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",

@@ -1,18 +1,20 @@
-const MongoClient = require('mongodb').MongoClient
 
-var DBINSTANCE;
+let DBINSTANCE;
 
-async function connectToMongo(successMessage) {
-    await MongoClient.connect(process.env.DBCONNSTRING, { useUnifiedTopology: true }, (err, client) => {
-
-        if (err) {
-            return console.log(err)
-        };
-
-        DBINSTANCE = client.db(process.env.DBNAME);
-        console.log(successMessage)
-    })
-}
+const [MongoClient,connectToMongo] = [
+    require('mongodb').MongoClient,
+    async (successMessage) => {
+        await MongoClient.connect(process.env.DBCONNSTRING, { useUnifiedTopology: true }, (err, client) => {
+    
+            if (err) {
+                return console.log(err)
+            };
+    
+            DBINSTANCE = client.db(process.env.DBNAME);
+            console.log(successMessage)
+        })
+    }
+];
 
 export {
     connectToMongo,

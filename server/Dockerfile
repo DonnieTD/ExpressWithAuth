@@ -1,7 +1,5 @@
 FROM node:slim
-
 ARG PORT
-
 WORKDIR /app
 COPY . /app
 RUN npm install
