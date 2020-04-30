@@ -1,16 +1,18 @@
 import { connectToMongo } from './lib/mongoConnect';
 
-const [express,bodyParser,cookieParser,users,cors,csurf,app] = [
+connectToMongo('Connection Succesful(MONGO)');
+
+const [express,bodyParser,cookieParser,users,cors,csurf] = [
     require('express'),
     require('body-parser'),
     require('cookie-parser'),
     require('./routes/users/users'),
     require('cors'),
     require('csurf'),
-    express()
+  
 ];
 
-connectToMongo('Connection Succesful(MONGO)');
+const app = express();
 
 app.use([
     express.json(),

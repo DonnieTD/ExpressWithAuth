@@ -2,11 +2,12 @@
 import AuthController from "../../controllers/AuthController";
 import { errorHandler } from "../../lib/error";
 
-const [express,router,jwt] = [
+const [express,jwt] = [
   require("express"),
-  express.Router(),
   require("jsonwebtoken")
 ];
+
+const router =  express.Router();
 
 router.post("/register", async function (req, res) {
   try {
