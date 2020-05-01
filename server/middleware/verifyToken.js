@@ -1,23 +1,12 @@
 const [ jwt , verifyToken ] = [
   require("jsonwebtoken"),
   async (req, res, next) => {
-    const token = req.cookies.token || "";
+      if (!req.cookies.token) return res.status(401).json("You need to Login");
   
-    try {
-      if (!token) {
-        return res.status(401).json("You need to Login");
-      }
+      const decrypt = await jwt.verify(req.cookies.token, process.env.SECRET_KEY);
   
-      const decrypt = await jwt.verify(token, process.env.SECRET_KEY);
-  
-      req.user = {
-        UserName: decrypt.UserName,
-      };
-  
+      req.user = {UserName: decrypt.UserName,};
       next();
-    } catch (err) {
-      return res.status(500).json(err.toString());
-    }
   }
 ];
 
