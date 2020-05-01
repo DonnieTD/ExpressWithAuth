@@ -3,7 +3,9 @@ import { DBINSTANCE } from "../db/mongoConnect";
 const [bcrypt, jwt, AuthController] = [require("bcryptjs"),require("jsonwebtoken"),{}];
 
 AuthController.CheckIfUserExists = async function (UsersCollection, UserName) {
-  const [col,docs] = [DBINSTANCE.collection(UsersCollection) ,await col.find({ UserName }).toArray()];
+  const col = DBINSTANCE.collection(UsersCollection);
+
+  const docs = await col.find({ UserName }).toArray()
   if (docs == false) throw "Invalid User";
   return docs;
 };

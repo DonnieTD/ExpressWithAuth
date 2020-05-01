@@ -1,4 +1,4 @@
-import { connectToMongo } from './lib/mongoConnect';
+import { connectToMongo } from './db/mongoConnect';
 
 connectToMongo('Connection Succesful(MONGO)');
 
@@ -9,7 +9,6 @@ const [express,bodyParser,cookieParser,users,cors,csurf] = [
     require('./routes/users/users'),
     require('cors'),
     require('csurf'),
-  
 ];
 
 const app = express();
