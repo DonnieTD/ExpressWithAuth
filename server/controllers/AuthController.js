@@ -32,11 +32,7 @@ AuthController.Login = async function (UserName, Password) {
 };
 
 AuthController.Register = async function (UsersCollection, UserName, Password) {
-  try {
     return await DBINSTANCE.collection(UsersCollection).insertOne({ UserName, Password: bcrypt.hashSync(Password) })          
-  } catch (err) {
-    throw "User Exists";
-  }
 };
 
 

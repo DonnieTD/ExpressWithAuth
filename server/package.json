@@ -4,14 +4,12 @@
   "description": "My express base with auth",
   "main": "server.js",
   "scripts": {
-    "start": "babel-node server.js"
+    "start": "babel-node server.js",
+    "test": "mocha --recursive --compilers js:babel-core/register"
   },
   "author": "Donovan van der Linde",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/node": "^7.8.7",
-    "@babel/preset-env": "^7.9.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
@@ -20,5 +18,11 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.5.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.0",
+    "mocha": "^7.1.2"
   }
 }

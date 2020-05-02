@@ -16,18 +16,14 @@ router.post("/login", async function (req, res) {
 
 router.post("/verify", async function (req, res) {
   if (!req.cookies.token) res.send(false);
-
   const decrypt = await jwt.verify(req.cookies.token,process.env.SECRET_KEY);
   delete decrypt["iat"];
   res.send(decrypt);
-  
 });
 
 router.post("/logout", async function (req, res) {
   const token = req.cookies.token;
-
   if (token) res.clearCookie("token");
-  
   res.send(true);
 });
 
