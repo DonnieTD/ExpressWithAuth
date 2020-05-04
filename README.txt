@@ -13,7 +13,3 @@ docker-compose up
 
 And we're up on port 4000
 
-//TO DO
-Clean Up 
-Deploy
-Write docs
